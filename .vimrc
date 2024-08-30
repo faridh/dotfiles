@@ -14,6 +14,7 @@ Plugin 'kaicataldo/material.vim', { 'branch': 'main' }
 Plugin 'Syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mattn/emmet-vim'
+Plugin 'vim-scripts/indentpython.vim'
 " Plug 'valloric/youcompleteme'
 
 " add all your plugins here (note older versions of Vundle
@@ -29,11 +30,15 @@ filetype plugin indent on    " required
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+set backspace=2
 set smarttab
 set expandtab
 set colorcolumn=80
 set wrap
 set clipboard=unnamedplus,unnamed,autoselect
+set encoding=utf-8
+set foldmethod=indent
+set foldlevel=99
 
 " Syntax Highlighting
 filetype on
@@ -66,6 +71,22 @@ hi clear
 if exists("syntax_on")
   syntax reset
 endif
+
+au BufNewFile,BufRead *.py
+      \ set tabstop=4 |
+      \ set softtabstop=4 |
+      \ set shiftwidth=4 |
+      \ set textwidth=79 |
+      \ set expandtab |
+      \ set autoindent |
+      \ set fileformat=unix
+
+au BufNewFile,BufRead *.js, *.html, *.css
+      \ set tabstop=2 |
+      \ set softtabstop=2 |
+      \ set shiftwidth=2
+
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 hi link Character       Constant
 hi link Boolean         Constant
